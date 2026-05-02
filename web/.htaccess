@@ -1,0 +1,11 @@
+Options +FollowSymlinks
+IndexIgnore */*
+
+RewriteEngine On
+
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php

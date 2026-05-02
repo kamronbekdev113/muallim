@@ -1,0 +1,920 @@
+/* ============================================================
+   MUALLIM — Sharqona/East Craft Design System
+   ============================================================ */
+
+:root {
+  --parchment:   #F8F3E6;
+  --parchment-dark: #EDE6D3;
+  --gold:        #C9A84C;
+  --gold-dark:   #A07832;
+  --gold-light:  #E8C96A;
+  --green-deep:  #1B4332;
+  --green-mid:   #2D6A4F;
+  --green-light: #40916C;
+  --brown:       #8B5E3C;
+  --brown-dark:  #5C3D1E;
+  --dark-text:   #2C1810;
+  --mid-text:    #5A4A3A;
+  --light-text:  #8B7355;
+  --card-bg:     #FFFDF7;
+  --border:      rgba(201,168,76,0.25);
+  --shadow:      rgba(44,24,16,0.12);
+  --arabic-font: 'Noto Naskh Arabic', 'Amiri', serif;
+  --ui-font:     'Montserrat', 'Segoe UI', sans-serif;
+}
+
+/* BASE */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--parchment);
+  font-family: var(--ui-font);
+  color: var(--dark-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ARABESQUE PATTERN (SVG background) */
+.arabesque-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.15'%3E%3Cpolygon points='40,2 51,17 68,17 57,29 61,46 40,37 19,46 23,29 12,17 29,17'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Cpolygon points='40,22 46,32 57,32 49,39 52,50 40,44 28,50 31,39 23,32 34,32'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.muallim-navbar {
+  background: var(--green-deep);
+  border-bottom: 3px solid var(--gold);
+  padding: 0.6rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none !important;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  color: var(--green-deep);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--arabic-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+}
+
+.brand-text {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.muallim-navbar .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 6px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.muallim-navbar .nav-link:hover {
+  color: var(--gold) !important;
+  background: rgba(201,168,76,0.1);
+}
+
+.muallim-navbar .nav-link i { margin-right: 5px; }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--green-deep) !important;
+  font-weight: 700;
+  padding: 0.45rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201,168,76,0.4);
+}
+
+/* User nav dropdown */
+.user-nav { display: flex; align-items: center; gap: 0.4rem; }
+.user-avatar {
+  width: 32px; height: 32px;
+  background: var(--gold); color: var(--green-deep);
+  border-radius: 50%; display: inline-flex;
+  align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem;
+}
+.user-name { color: #fff; font-size: 0.88rem; }
+.xp-badge {
+  background: rgba(201,168,76,0.2);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.4);
+  padding: 1px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600;
+}
+
+.dropdown-menu {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px var(--shadow);
+  background: var(--card-bg);
+}
+.dropdown-header { padding: 0.75rem 1rem; }
+.level-name { font-weight: 700; font-size: 0.9rem; }
+
+/* Navbar toggler */
+.navbar-toggler { border: 1px solid rgba(255,255,255,0.3); padding: 4px 8px; }
+.navbar-toggler i { color: #fff; font-size: 1.1rem; }
+
+/* ============================================================
+   FLASH TOASTS
+   ============================================================ */
+.alert-toast {
+  position: fixed; top: 70px; right: 20px;
+  padding: 0.85rem 1.5rem; border-radius: 10px;
+  z-index: 9999; display: flex; align-items: center;
+  gap: 0.6rem; font-weight: 500; font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  animation: slideIn 0.3s ease;
+  max-width: 380px;
+}
+.alert-toast-success { background: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+.alert-toast-error   { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.alert-toast-info    { background: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+.close-toast { background: none; border: none; cursor: pointer; font-size: 1.1rem; opacity: 0.6; margin-left: auto; }
+@keyframes slideIn { from { transform: translateX(100px); opacity:0; } to { transform: translateX(0); opacity:1; } }
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.muallim-main { flex: 1; }
+
+/* ============================================================
+   HERO / BANNER
+   ============================================================ */
+.muallim-hero {
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.muallim-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='0.5' opacity='0.12'%3E%3Cpolygon points='50,3 63,22 85,22 70,37 76,58 50,46 24,58 30,37 15,22 37,22'/%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100px 100px;
+}
+.muallim-hero .hero-bismillah {
+  font-family: var(--arabic-font);
+  font-size: 2.2rem;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  direction: rtl;
+}
+.muallim-hero h1 {
+  font-size: 2.8rem; font-weight: 700;
+  color: #fff; text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.muallim-hero p {
+  color: rgba(255,255,255,0.85); text-align: center;
+  font-size: 1.1rem; max-width: 550px; margin: 0 auto 2rem;
+}
+
+/* Ornate divider */
+.ornate-divider {
+  text-align: center;
+  margin: 0.5rem 0 2rem;
+  color: var(--gold);
+  font-size: 1.4rem;
+  letter-spacing: 8px;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.muallim-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px var(--shadow);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.muallim-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(44,24,16,0.15);
+}
+.muallim-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.card-ornament {
+  position: absolute;
+  top: 8px; right: 12px;
+  font-size: 2rem;
+  opacity: 0.06;
+  font-family: var(--arabic-font);
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-top: 3rem;
+}
+.section-header h2 {
+  font-size: 1.9rem; font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+}
+.section-header p { color: var(--mid-text); font-size: 1rem; }
+
+.gold-underline {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin: 0.6rem auto 0;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   ARABIC LETTERS GRID
+   ============================================================ */
+.letter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1rem; }
+
+.letter-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none !important;
+  display: block;
+}
+.letter-card:hover {
+  background: var(--green-deep);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(27,67,50,0.25);
+}
+.letter-card:hover .letter-arabic, .letter-card:hover .letter-name { color: #fff; }
+.letter-card:hover .letter-number { color: var(--gold); }
+
+.letter-arabic {
+  font-family: var(--arabic-font);
+  font-size: 2.2rem;
+  color: var(--green-deep);
+  line-height: 1.2;
+  display: block;
+}
+.letter-name {
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--mid-text);
+  display: block; margin-top: 4px;
+}
+.letter-number {
+  font-size: 0.65rem; color: var(--light-text);
+  display: block;
+}
+.letter-card.completed { border-color: var(--green-light); }
+.letter-card.completed::after {
+  content: '✓';
+  position: absolute; top: 4px; right: 6px;
+  font-size: 0.7rem; color: var(--green-light);
+}
+.letter-card { position: relative; }
+
+/* ============================================================
+   LETTER VIEW
+   ============================================================ */
+.letter-hero {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(27,67,50,0.3);
+}
+.letter-display {
+  font-family: var(--arabic-font);
+  font-size: 5rem;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(201,168,76,0.4);
+}
+.letter-transliteration {
+  font-size: 1.4rem; color: rgba(255,255,255,0.85);
+  font-weight: 600; margin-top: 0.5rem;
+}
+
+.letter-forms-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  margin: 1.5rem 0;
+}
+.letter-form-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem;
+  text-align: center;
+}
+.form-label-small { font-size: 0.7rem; color: var(--light-text); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-arabic-text { font-family: var(--arabic-font); font-size: 2.2rem; color: var(--green-deep); }
+
+/* ============================================================
+   CHAPTERS / LESSONS
+   ============================================================ */
+.chapter-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+  text-decoration: none !important;
+  display: block;
+  color: inherit !important;
+}
+.chapter-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 6px 24px var(--shadow);
+  transform: translateX(4px);
+}
+.chapter-icon {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  color: var(--gold);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.chapter-number {
+  font-size: 0.7rem; color: var(--light-text);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.chapter-title { font-size: 1.1rem; font-weight: 700; color: var(--dark-text); }
+.chapter-desc { font-size: 0.85rem; color: var(--mid-text); }
+
+/* Lesson view */
+.lesson-arabic {
+  font-family: var(--arabic-font);
+  font-size: 2.2rem;
+  direction: rtl;
+  text-align: right;
+  line-height: 2.2;
+  color: var(--green-deep);
+  background: linear-gradient(135deg, var(--parchment-dark), var(--parchment));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow: inset 0 2px 12px rgba(201,168,76,0.08);
+}
+.lesson-transliteration {
+  background: rgba(27,67,50,0.05);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1.25rem;
+  font-style: italic; color: var(--mid-text);
+  margin: 0.75rem 0;
+}
+.lesson-translation {
+  background: rgba(201,168,76,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1.25rem;
+  color: var(--dark-text); font-weight: 500;
+  margin: 0.75rem 0;
+}
+
+/* ============================================================
+   TAJWEED RULE CARD
+   ============================================================ */
+.tajweed-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  padding: 1.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none !important;
+  display: block; color: inherit !important;
+}
+.tajweed-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px var(--shadow); }
+
+.tajweed-color-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.tajweed-arabic { font-family: var(--arabic-font); font-size: 1.6rem; direction: rtl; }
+
+.color-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+.color-legend-item {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 0.78rem;
+}
+.color-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+/* ============================================================
+   MUSHAF / QURAN
+   ============================================================ */
+.mushaf-wrapper {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 40px var(--shadow);
+}
+.mushaf-bismillah {
+  font-family: var(--arabic-font);
+  font-size: 2rem;
+  direction: rtl;
+  text-align: center;
+  color: var(--green-deep);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.ayah-row {
+  direction: rtl;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+}
+.ayah-text {
+  font-family: var(--arabic-font);
+  font-size: 1.8rem;
+  line-height: 2.6;
+  color: var(--dark-text);
+  direction: rtl;
+  text-align: right;
+}
+.ayah-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  background: var(--gold);
+  color: var(--green-deep);
+  border-radius: 50%;
+  font-size: 0.75rem; font-weight: 700;
+  margin: 0 6px;
+  font-family: var(--ui-font);
+  direction: ltr;
+}
+.ayah-translation {
+  font-size: 0.82rem; color: var(--mid-text);
+  text-align: left; direction: ltr;
+  padding: 0.4rem 0 0.2rem 0.5rem;
+  border-left: 2px solid rgba(201,168,76,0.3);
+  margin-top: 0.3rem;
+}
+
+/* Surah list */
+.surah-item {
+  display: flex; align-items: center;
+  padding: 0.75rem 1rem; gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 0.5rem;
+  transition: all 0.15s;
+  text-decoration: none !important; color: inherit !important;
+  background: var(--card-bg);
+}
+.surah-item:hover { border-color: var(--gold); background: var(--parchment); }
+.surah-num {
+  width: 36px; height: 36px;
+  background: var(--green-deep); color: var(--gold);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+}
+.surah-name-ar { font-family: var(--arabic-font); font-size: 1.2rem; color: var(--dark-text); }
+.surah-name-uz { font-size: 0.85rem; color: var(--mid-text); }
+.surah-ayahs { margin-left: auto; font-size: 0.75rem; color: var(--light-text); }
+
+/* ============================================================
+   PRAYER TIMES
+   ============================================================ */
+.prayer-widget {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  border-radius: 20px;
+  padding: 2rem;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(27,67,50,0.3);
+}
+.prayer-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.prayer-item:last-child { border-bottom: none; }
+.prayer-name { font-weight: 600; font-size: 0.95rem; }
+.prayer-time { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+.prayer-item.active-prayer {
+  background: rgba(201,168,76,0.15);
+  border-radius: 10px; padding: 0.75rem 1rem; margin: 0 -1rem;
+}
+.next-prayer-countdown {
+  text-align: center; padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 0.5rem;
+}
+.countdown-time { font-size: 2.5rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.countdown-label { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+.profile-header {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  border-radius: 20px; padding: 2.5rem;
+  color: #fff; text-align: center;
+  box-shadow: 0 8px 32px rgba(27,67,50,0.3);
+  position: relative; overflow: hidden;
+}
+.profile-avatar {
+  width: 80px; height: 80px;
+  background: var(--gold); color: var(--green-deep);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 2.5rem; font-weight: 700;
+  margin: 0 auto 1rem;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.4);
+}
+.profile-level {
+  display: inline-block;
+  padding: 4px 16px; border-radius: 20px;
+  font-size: 0.85rem; font-weight: 700;
+  border: 1px solid; margin: 0.5rem 0;
+}
+.xp-progress-bar-wrap {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px; height: 8px; margin-top: 0.75rem;
+  overflow: hidden;
+}
+.xp-progress-bar-fill {
+  height: 100%; border-radius: 10px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.8s ease;
+}
+
+.stat-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem; text-align: center;
+}
+.stat-number { font-size: 2.2rem; font-weight: 800; color: var(--green-deep); }
+.stat-label { font-size: 0.8rem; color: var(--mid-text); font-weight: 500; }
+.streak-flame { color: #ff6b35; }
+
+/* ============================================================
+   FLASHCARDS
+   ============================================================ */
+.flashcard-scene {
+  perspective: 1000px;
+  width: 320px; height: 200px; margin: 0 auto;
+  cursor: pointer;
+}
+.flashcard {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px; border: 2px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+.flashcard-front { background: var(--card-bg); }
+.flashcard-back {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  transform: rotateY(180deg);
+  color: #fff;
+}
+.flashcard-arabic { font-family: var(--arabic-font); font-size: 3.5rem; color: var(--green-deep); }
+.flashcard-back .flashcard-arabic { color: var(--gold); }
+.flashcard-hint { font-size: 0.75rem; color: var(--light-text); margin-top: 0.5rem; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-muallim {
+  background: var(--green-deep); color: #fff;
+  border: none; border-radius: 10px;
+  padding: 0.65rem 1.5rem; font-weight: 600;
+  font-size: 0.9rem; cursor: pointer;
+  transition: all 0.2s; text-decoration: none !important;
+  display: inline-block;
+}
+.btn-muallim:hover { background: var(--green-mid); color: #fff; transform: translateY(-1px); }
+
+.btn-muallim-outline {
+  background: transparent; color: var(--green-deep);
+  border: 2px solid var(--green-deep);
+  border-radius: 10px; padding: 0.6rem 1.5rem;
+  font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none !important; display: inline-block;
+}
+.btn-muallim-outline:hover { background: var(--green-deep); color: #fff; }
+
+.btn-gold-fill {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--green-deep); border: none;
+  border-radius: 10px; padding: 0.65rem 1.5rem;
+  font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none !important; display: inline-block;
+  box-shadow: 0 4px 14px rgba(201,168,76,0.35);
+}
+.btn-gold-fill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.5); color: var(--green-deep); }
+
+/* Nav prev/next */
+.lesson-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 2rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.muallim-footer {
+  background: var(--green-deep);
+  color: rgba(255,255,255,0.75);
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.footer-pattern {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='0.3' opacity='0.1'%3E%3Cpolygon points='30,3 37,13 50,13 41,21 44,33 30,26 16,33 19,21 10,13 23,13'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+.footer-brand { position: relative; }
+.brand-icon-lg {
+  width: 56px; height: 56px;
+  background: var(--gold); color: var(--green-deep);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-family: var(--arabic-font);
+  font-size: 1.8rem; font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.muallim-footer h4 { color: #fff; font-weight: 700; margin: 0.25rem 0 0.5rem; }
+.muallim-footer h6 { color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; }
+.footer-links { list-style: none; padding: 0; margin: 0; }
+.footer-links li { margin-bottom: 0.35rem; }
+.footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid rgba(201,168,76,0.2);
+  margin-top: 2rem; padding-top: 1.5rem;
+  text-align: center; position: relative;
+}
+.arabic-phrase {
+  font-family: var(--arabic-font);
+  font-size: 1.4rem; color: var(--gold);
+  margin-bottom: 0.5rem; direction: rtl;
+}
+.footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin: 0; }
+
+/* ============================================================
+   FORMS (Login / Register)
+   ============================================================ */
+.auth-wrapper {
+  min-height: 80vh; display: flex; align-items: center; justify-content: center;
+  padding: 2rem 0;
+}
+.auth-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 48px var(--shadow);
+  width: 100%; max-width: 420px;
+}
+.auth-logo {
+  text-align: center; margin-bottom: 2rem;
+}
+.auth-logo .brand-icon {
+  width: 60px; height: 60px;
+  font-size: 2rem; margin: 0 auto 0.75rem;
+}
+.auth-logo h3 { font-size: 1.5rem; font-weight: 700; color: var(--dark-text); }
+.auth-logo p { color: var(--mid-text); font-size: 0.88rem; }
+
+.form-control-muallim {
+  border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 0.7rem 1rem;
+  background: var(--parchment);
+  font-size: 0.92rem; color: var(--dark-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.form-control-muallim:focus {
+  outline: none;
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.12);
+  background: #fff;
+}
+.form-label-muallim { font-size: 0.82rem; font-weight: 600; color: var(--mid-text); margin-bottom: 0.35rem; display: block; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ============================================================
+   BADGES / PILLS
+   ============================================================ */
+.badge-makki { background: rgba(201,168,76,0.15); color: var(--gold-dark); border: 1px solid rgba(201,168,76,0.3); }
+.badge-madani { background: rgba(27,67,50,0.1); color: var(--green-mid); border: 1px solid rgba(27,67,50,0.2); }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.text-arabic { font-family: var(--arabic-font); direction: rtl; }
+.text-gold { color: var(--gold) !important; }
+.text-green-deep { color: var(--green-deep) !important; }
+.text-mid { color: var(--mid-text) !important; }
+.bg-parchment { background: var(--parchment); }
+.py-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.mb-section { margin-bottom: 3.5rem; }
+.rounded-muallim { border-radius: 16px; }
+.ornate-border {
+  border: 2px solid var(--border);
+  position: relative;
+}
+.ornate-border::after {
+  content: '❖';
+  position: absolute; bottom: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--parchment);
+  color: var(--gold); font-size: 0.9rem;
+  padding: 0 8px;
+}
+
+/* TTS Button */
+.tts-btn {
+  background: none; border: 1px solid var(--border);
+  border-radius: 6px; padding: 3px 8px;
+  color: var(--mid-text); cursor: pointer;
+  font-size: 0.75rem; transition: all 0.2s;
+}
+.tts-btn:hover { background: var(--green-deep); color: #fff; border-color: var(--green-deep); }
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-muallim {
+  height: 8px; background: var(--parchment-dark);
+  border-radius: 4px; overflow: hidden;
+}
+.progress-muallim .bar {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.6s ease;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .muallim-hero h1 { font-size: 1.9rem; }
+  .muallim-hero .hero-bismillah { font-size: 1.7rem; }
+  .letter-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.6rem; }
+  .letter-arabic { font-size: 1.8rem; }
+  .lesson-arabic { font-size: 1.6rem; padding: 1.25rem; }
+  .auth-card { padding: 1.75rem; }
+  .flashcard-scene { width: 100%; }
+  .letter-forms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   DARK MODE TOGGLE BUTTON
+   ============================================================ */
+.theme-toggle-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: 5px 12px;
+  color: rgba(255,255,255,0.85); cursor: pointer;
+  font-size: 0.85rem; transition: all 0.2s;
+  line-height: 1;
+}
+.theme-toggle-btn:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); }
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+[data-theme="dark"] {
+  --parchment:      #0F1923;
+  --parchment-dark: #0B1520;
+  --gold:           #E8C96A;
+  --gold-dark:      #C9A84C;
+  --gold-light:     #F5D98B;
+  --green-deep:     #1A3A2A;
+  --green-mid:      #234D38;
+  --green-light:    #2E6349;
+  --dark-text:      #EDE6D3;
+  --mid-text:       #A89880;
+  --light-text:     #6A5A48;
+  --card-bg:        #162130;
+  --border:         rgba(232,201,106,0.18);
+  --shadow:         rgba(0,0,0,0.45);
+}
+
+[data-theme="dark"] body { background-color: var(--parchment); }
+
+[data-theme="dark"] .muallim-navbar { background: #0B1520; box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+
+[data-theme="dark"] .dropdown-menu { background: #1A2A3A; border-color: var(--border); }
+[data-theme="dark"] .dropdown-item { color: var(--dark-text); }
+[data-theme="dark"] .dropdown-item:hover { background: rgba(232,201,106,0.1); color: var(--gold); }
+[data-theme="dark"] .dropdown-divider { border-color: var(--border); }
+[data-theme="dark"] .dropdown-header { background: transparent; }
+
+[data-theme="dark"] .muallim-footer { background: #080F18; }
+
+[data-theme="dark"] .form-control-muallim {
+  background: #1A2A3A; color: var(--dark-text); border-color: var(--border);
+}
+[data-theme="dark"] .form-control-muallim:focus { background: #213040; }
+
+[data-theme="dark"] .alert-toast-success { background: #132A1E; color: #7dcfa0; border-left-color: #2d9b5e; }
+[data-theme="dark"] .alert-toast-error   { background: #2A1318; color: #cf7d7d; border-left-color: #9b2d35; }
+[data-theme="dark"] .alert-toast-info    { background: #132035; color: #7daacf; border-left-color: #2d6b9b; }
+
+[data-theme="dark"] .surah-item:hover { background: #1A2A3A; }
+[data-theme="dark"] .ornate-border::after { background: var(--parchment); }
+[data-theme="dark"] .lesson-arabic { background: linear-gradient(135deg, #1A2A3A, #162130); }
+[data-theme="dark"] .mushaf-wrapper { background: var(--card-bg); }
+[data-theme="dark"] .progress-muallim { background: #1A2A3A; }
+[data-theme="dark"] .navbar-toggler { border-color: rgba(255,255,255,0.2); }
+
+/* ── Dark mode: text colors that used --green-deep (too dark) ── */
+[data-theme="dark"] .letter-arabic       { color: var(--gold); }
+[data-theme="dark"] .letter-card:hover .letter-arabic { color: #fff; }
+[data-theme="dark"] .form-arabic-text    { color: var(--gold); }
+[data-theme="dark"] .stat-number         { color: var(--gold); }
+[data-theme="dark"] .lesson-arabic       { color: var(--dark-text); }
+[data-theme="dark"] .flashcard-arabic    { color: var(--gold); }
+[data-theme="dark"] .tajweed-arabic      { color: var(--dark-text); }
+[data-theme="dark"] .chapter-title       { color: var(--dark-text); }
+[data-theme="dark"] .chapter-desc        { color: var(--mid-text); }
+[data-theme="dark"] .surah-name-ar       { color: var(--dark-text); }
+[data-theme="dark"] .ayah-text           { color: var(--dark-text); }
+[data-theme="dark"] .auth-logo h3        { color: var(--dark-text); }
+[data-theme="dark"] .section-header h2   { color: var(--dark-text); }
+
+/* ── Dark mode: white/light hardcoded backgrounds ── */
+[data-theme="dark"] .mashq-card         { background: var(--card-bg) !important; color: var(--dark-text) !important; }
+[data-theme="dark"] .mashq-tile         { background: var(--card-bg) !important; color: var(--dark-text) !important; }
+[data-theme="dark"] .color-legend-item  { background: rgba(255,255,255,0.05); color: var(--dark-text); }
+[data-theme="dark"] .speed-opt-btn      { background: var(--card-bg); color: var(--dark-text); border-color: var(--border); }
+[data-theme="dark"] .mem-back           { background: var(--card-bg); }
+[data-theme="dark"] .mem-back .ar       { color: var(--gold); }
+[data-theme="dark"] .history-item       { background: #0F1923; border-color: var(--border); }
+[data-theme="dark"] .heard-text         { background: rgba(255,255,255,0.03); color: var(--dark-text); }
+
+/* ── Dark mode: letter card hover (green-deep bg is now very dark) ── */
+[data-theme="dark"] .letter-card:hover  {
+    background: #0F3020;
+    border-color: var(--gold);
+}
+[data-theme="dark"] .letter-card:hover .letter-name   { color: var(--gold); }
+[data-theme="dark"] .letter-card:hover .letter-number { color: rgba(255,255,255,0.6); }

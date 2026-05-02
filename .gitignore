@@ -1,0 +1,15 @@
+.idea
+.vscode
+nbproject
+.buildpath
+.project
+.settings
+Thumbs.db
+/vendor
+composer.phar
+.DS_Store
+phpunit.phar
+/phpunit.xml
+/runtime/logs
+/runtime/cache
+/web/assets

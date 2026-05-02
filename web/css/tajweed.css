@@ -1,0 +1,157 @@
+/* ============================================================
+   TAJWEED COLOR SYSTEM
+   ============================================================ */
+
+/* Base tajweed text */
+.tajweed-text { font-family: 'Noto Naskh Arabic', 'Amiri', serif; }
+/* Ayah end mark from quran.com — oyat raqami doira */
+.end {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1.5px solid var(--gold, #C9A84C);
+  border-radius: 50%;
+  font-size: .85rem;
+  font-family: 'Amiri', serif;
+  color: var(--gold, #C9A84C);
+  margin: 0 .35rem;
+  vertical-align: middle;
+  line-height: 1;
+  direction: rtl;
+}
+
+/* Qalqala — sariq (قطبجد) */
+.tj-qalqala {
+  color: #B8860B;
+  background: rgba(255,215,0,0.18);
+  border-radius: 3px; padding: 0 1px;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255,215,0,0.3);
+}
+
+/* Ghunna — yashil (ن م shaddali) */
+.tj-ghunna {
+  color: #155724;
+  background: rgba(144,238,144,0.25);
+  border-radius: 3px; padding: 0 1px;
+  font-weight: 600;
+  border-bottom: 1.5px solid #28a745;
+}
+
+/* Madd — ko'k (cho'zilish) */
+.tj-madd {
+  color: #003087;
+  background: rgba(135,206,235,0.2);
+  border-radius: 3px; padding: 0 1px;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #1a6fb5;
+}
+.tj-madd-muttasil {
+  color: #003087;
+  background: rgba(79,195,247,0.2);
+  border-radius: 3px; padding: 0 1px;
+  border-bottom: 2px solid #1a6fb5;
+}
+.tj-madd-munfasil {
+  color: #0d47a1;
+  background: rgba(41,182,246,0.15);
+  border-radius: 3px; padding: 0 1px;
+  border-bottom: 2px dashed #0d47a1;
+}
+
+/* Ikhfa — to'q sariq */
+.tj-ikhfa {
+  color: #855103;
+  background: rgba(255,179,71,0.2);
+  border-radius: 3px; padding: 0 1px;
+  font-weight: 600;
+}
+
+/* Idgham — binafsha */
+.tj-idgham {
+  color: #4a0080;
+  background: rgba(221,160,221,0.25);
+  border-radius: 3px; padding: 0 1px;
+  font-weight: 600;
+}
+
+/* Iqlab — qizil */
+.tj-iqlab {
+  color: #8b0000;
+  background: rgba(240,128,128,0.2);
+  border-radius: 3px; padding: 0 1px;
+  font-weight: 600;
+}
+
+/* Izhar — kulrang-ko'k */
+.tj-izhar {
+  color: #1c3a5e;
+  background: rgba(176,196,222,0.25);
+  border-radius: 3px; padding: 0 1px;
+}
+
+/* Lam shamsiyya */
+.tj-lam-shams {
+  color: #5d3a00;
+  background: rgba(255,204,128,0.2);
+  border-radius: 3px; padding: 0 1px;
+}
+/* Hamzat wasl */
+.tj-hamza {
+  color: #888;
+}
+/* Silent / sukun */
+.tj-silent {
+  color: #aaa;
+}
+
+/* Lam shamsi (old) */
+.tj-lam-shamsi {
+  color: #5d3a00;
+  background: rgba(255,204,128,0.2);
+  border-radius: 3px; padding: 0 1px;
+}
+
+/* Lam qamari */
+.tj-lam-qamari {
+  color: #2e0060;
+  background: rgba(206,147,216,0.2);
+  border-radius: 3px; padding: 0 1px;
+}
+
+/* Waqf */
+.tj-waqf {
+  color: #1b5e20;
+  background: rgba(165,214,167,0.2);
+  border-radius: 3px; padding: 0 1px;
+}
+
+/* ============================================================
+   TAJWEED COLOR LEGEND (reference table)
+   ============================================================ */
+.tajweed-legend {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.7);
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.legend-dot.qalqala  { background: #FFD700; }
+.legend-dot.ghunna   { background: #90EE90; }
+.legend-dot.madd     { background: #87CEEB; }
+.legend-dot.ikhfa    { background: #FFB347; }
+.legend-dot.idgham   { background: #DDA0DD; }
+.legend-dot.iqlab    { background: #F08080; }
+.legend-dot.izhar    { background: #B0C4DE; }
