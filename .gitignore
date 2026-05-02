@@ -10,6 +10,5 @@ composer.phar
 .DS_Store
 phpunit.phar
 /phpunit.xml
-/runtime/logs
-/runtime/cache
+/runtime
 /web/assets
