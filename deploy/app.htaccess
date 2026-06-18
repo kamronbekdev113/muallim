@@ -1,0 +1,9 @@
+# Bu faylni htdocs/app/.htaccess sifatida joylang.
+# Framework fayllariga to'g'ridan-to'g'ri brauzer orqali kirishni taqiqlaydi.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
