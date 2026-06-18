@@ -41,6 +41,22 @@ $this->title = $lesson->title_uz;
         <?php endif; ?>
     </div>
 
+    <!-- Alijon qori video darsi (avval ESHITING) -->
+    <?php if (!empty($lesson->video_id)): ?>
+    <div class="muallim-card mb-3" style="border-color:rgba(34,139,87,.4)">
+        <div class="card-ornament">▶</div>
+        <h6 style="font-weight:700;color:var(--green-deep);text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;margin-bottom:.3rem">🎧 SHAYX ALIJON QORI DARSI</h6>
+        <p style="font-size:.8rem;color:var(--mid-text);margin-bottom:.85rem">Avval ustozni diqqat bilan eshiting, keyin takrorlang.</p>
+        <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:12px;overflow:hidden;background:#000">
+            <iframe src="https://www.youtube-nocookie.com/embed/<?= htmlspecialchars($lesson->video_id) ?>"
+                    title="Alijon qori — <?= htmlspecialchars($lesson->title_uz) ?>"
+                    style="position:absolute;inset:0;width:100%;height:100%;border:0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <!-- Arabic Text -->
     <?php if ($lesson->arabic_text): ?>
     <div class="muallim-card mb-3">
@@ -67,6 +83,18 @@ $this->title = $lesson->title_uz;
     <div class="lesson-translation">
         <i class="fas fa-language mr-2" style="color:var(--gold-dark)"></i>
         <strong>Ma'nosi:</strong> <?= Html::encode($lesson->translation_uz) ?>
+    </div>
+    <?php endif; ?>
+
+    <!-- Asl kitob sahifasi -->
+    <?php if (!empty($lesson->book_page)): ?>
+    <div class="muallim-card mb-3">
+        <div class="card-ornament">📖</div>
+        <h6 style="font-weight:700;color:var(--mid-text);text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;margin-bottom:.3rem">ASL KITOB SAHIFASI</h6>
+        <p style="font-size:.78rem;color:var(--light-text);margin-bottom:.85rem">Muallimi Soniy, <?= (int)$lesson->book_page ?>-bet.</p>
+        <img src="<?= Url::to('@web/img/muallim/' . sprintf('p%02d.png', $lesson->book_page)) ?>"
+             alt="Muallimi Soniy <?= (int)$lesson->book_page ?>-bet"
+             style="width:100%;border-radius:8px;border:1px solid var(--border);background:#fff">
     </div>
     <?php endif; ?>
 

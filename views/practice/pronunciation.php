@@ -10,9 +10,12 @@ foreach ($letters as $l) {
         'name'  => $l->name_uz,
         'trans' => $l->transliteration,
         'iso'   => $l->isolated,
+        'letter'=> $l->letter,
+        'sound' => $l->soundUrl() ? Url::to($l->soundUrl()) : '',
         'note'  => $l->pronunciation_note ?? '',
     ];
 }
+$ttsBase = Url::to(['/mashq/tts']);
 ?>
 
 <div class="container" style="max-width:680px;padding:2rem 1rem 3rem">
@@ -98,7 +101,7 @@ foreach ($letters as $l) {
         <div class="row" style="gap:.5rem;margin:0">
             <?php foreach ($letters as $l): ?>
             <div style="text-align:center;background:rgba(255,255,255,.8);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:.6rem .4rem;min-width:70px;cursor:pointer"
-                 onclick="speakText('<?= htmlspecialchars($l->name_uz) ?>')"
+                 onclick="playSound('<?= $l->soundUrl() ? Url::to($l->soundUrl()) : '' ?>','<?= htmlspecialchars($l->letter) ?>')"
                  title="Bosing: <?= htmlspecialchars($l->name_uz) ?>">
                 <div style="font-family:var(--arabic-font);font-size:1.8rem;color:var(--green-deep);line-height:1.2"><?= $l->isolated ?></div>
                 <div style="font-size:.72rem;color:var(--mid-text)"><?= Html::encode($l->name_uz) ?></div>
@@ -232,11 +235,23 @@ function showResult(){
     document.getElementById('startBtn').style.display='';
 }
 
-function speakText(text){
-    if(!('speechSynthesis' in window))return;
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='ar-SA';u.rate=0.8;
-    speechSynthesis.speak(u);
+const TTS_BASE = <?= json_encode($ttsBase) ?>;
+// Google TTS (server proxy) — so'z/harf uchun aniq ovoz; zaxira: brauzer ovozi
+function ttsProxy(arabic){
+    if(!arabic) return;
+    var a=new Audio(TTS_BASE+'?q='+encodeURIComponent(arabic));
+    a.onerror=function(){ if('speechSynthesis' in window){var u=new SpeechSynthesisUtterance(arabic);u.lang='ar-SA';u.rate=.8;speechSynthesis.speak(u);} };
+    var p=a.play(); if(p&&p.catch) p.catch(function(){});
 }
-function speakCurrent(){if(currentQ)speakText(currentQ.name);}
+// Harf SOZI (nomi emas): «fa fi fu». Avval LOKAL fayl, bo'lmasa Google proxy.
+function letterSound(ch){ return ch+'َ '+ch+'ِ '+ch+'ُ'; }
+function playSound(url, ch){
+    if(url){
+        var a=new Audio(url);
+        a.onerror=function(){ ttsProxy(letterSound(ch)); };
+        var p=a.play(); if(p&&p.catch) p.catch(function(){ ttsProxy(letterSound(ch)); });
+    } else { ttsProxy(letterSound(ch)); }
+}
+function playLetterSound(ch){ playSound('', ch); }
+function speakCurrent(){ if(currentQ) playSound(currentQ.sound, currentQ.letter || currentQ.iso); }
 </script>

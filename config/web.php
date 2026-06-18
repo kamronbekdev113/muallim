@@ -99,6 +99,8 @@ $config = [
                 'mashq/gapirish'  => 'practice/speaking',
                 'mashq/ai-muallim' => 'practice/ai-chat',
                 'mashq/ai-chat-api' => 'practice/ai-chat-api',
+                'mashq/nutq-tekshir' => 'practice/check-speech',
+                'mashq/tts' => 'practice/tts',
                 'mashq/yozuv/<id:\d+>' => 'practice/writing',
 
                 // Quiz

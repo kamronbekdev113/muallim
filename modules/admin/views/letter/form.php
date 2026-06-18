@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
             <div class="col-md-3"><?= $form->field($model, 'final')->textInput(['class' => 'form-control', 'style' => 'font-family:Amiri,serif;font-size:1.5rem;direction:rtl'])->label('Oxirida') ?></div>
         </div>
         <?= $form->field($model, 'pronunciation_note')->textarea(['class' => 'form-control', 'rows' => 2])->label('Talaffuz izohi') ?>
-        <?= $form->field($model, 'examples_json')->textarea(['class' => 'form-control', 'rows' => 3, 'placeholder' => '[{"word":"بَيْت","meaning":"uy"}]'])->label('Misollar (JSON)') ?>
+        <?= $form->field($model, 'examples_json')->textarea(['class' => 'form-control', 'rows' => 3, 'placeholder' => '[{"ar":"بَيْت","uz":"uy"}]'])->label('Misollar (JSON)') ?>
         <div class="mt-3"><button type="submit" class="btn-save">Saqlash</button></div>
         <?php ActiveForm::end(); ?>
     </div>

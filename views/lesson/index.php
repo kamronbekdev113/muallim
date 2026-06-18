@@ -5,10 +5,30 @@ $this->title = "Muallimi Soniy Darslari";
 ?>
 <div class="container py-section">
     <div class="section-header">
-        <h2>📚 Muallimi Soniy</h2>
-        <p>Arab tilini 0'dan o'rganishning an'anaviy yo'li — 8 bob, 40+ dars</p>
+        <h2>📚 Muallimi Soniy — o'quv reja</h2>
+        <p>Boshidan oxirigacha bosqichma-bosqich — har darsda Shayx Alijon qori videosi</p>
         <div class="gold-underline"></div>
     </div>
+
+    <!-- Bosqich 1: Harflar (Alifbo) -->
+    <?php $lpct = $letterTotal ? round($letterDone / $letterTotal * 100) : 0; ?>
+    <a href="<?= Url::to(['/alifbo']) ?>" class="muallim-card mb-3" style="display:block;text-decoration:none;color:inherit;border-color:rgba(34,139,87,.45)">
+        <div class="d-flex align-items-start" style="gap:1rem;flex-wrap:wrap">
+            <div class="chapter-icon" style="margin-top:2px"><i class="fas fa-font"></i></div>
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center" style="gap:0.5rem;flex-wrap:wrap;margin-bottom:0.3rem">
+                    <span class="chapter-number">Bosqich 1</span>
+                    <h5 style="margin:0;font-weight:700">Harflar (Alifbo) — 28 harf</h5>
+                    <?php if ($letterDone > 0): ?>
+                    <span style="background:var(--green-deep);color:var(--gold);padding:2px 10px;border-radius:10px;font-size:0.72rem;font-weight:600"><?= $letterDone ?>/<?= $letterTotal ?></span>
+                    <?php endif; ?>
+                </div>
+                <p style="color:var(--mid-text);font-size:0.85rem;margin-bottom:0.75rem">Har harf: Shayx Alijon qori darsi, 4 shakli, kitobdagi so'zlari va o'qilishi bilan. Muallimi Soniy tartibida.</p>
+                <div class="progress-muallim" style="max-width:300px"><div class="bar" style="width:<?= $lpct ?>%"></div></div>
+            </div>
+            <i class="fas fa-chevron-right" style="color:var(--border);align-self:center"></i>
+        </div>
+    </a>
 
     <?php foreach ($chapters as $ch): ?>
     <?php
@@ -24,7 +44,7 @@ $this->title = "Muallimi Soniy Darslari";
             </div>
             <div class="flex-grow-1">
                 <div class="d-flex align-items-center" style="gap:0.5rem;flex-wrap:wrap;margin-bottom:0.3rem">
-                    <span class="chapter-number">Bob <?= $ch->number ?></span>
+                    <span class="chapter-number">Bosqich <?= $ch->number + 1 ?></span>
                     <h5 style="margin:0;font-weight:700"><?= Html::encode($ch->title_uz) ?></h5>
                     <?php if ($done > 0): ?>
                     <span style="background:var(--green-deep);color:var(--gold);padding:2px 10px;border-radius:10px;font-size:0.72rem;font-weight:600">

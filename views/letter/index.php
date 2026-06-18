@@ -6,7 +6,7 @@ $this->title = 'Arab Alifbosi';
 <div class="container py-section">
     <div class="section-header">
         <h2>🔤 Arab Alifbosi</h2>
-        <p>28 harf — shakllari, talaffuzi, yozilishi va misollari bilan</p>
+        <p>Muallimi Soniy tartibida — har harfda Shayx Alijon qori darsi, so'zlari va o'qilishi bilan</p>
         <div class="gold-underline"></div>
     </div>
 

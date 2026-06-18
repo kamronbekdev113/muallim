@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use app\models\MuallimiChapter;
 use app\models\MuallimiLesson;
+use app\models\ArabicLetter;
 use app\models\UserProgress;
 
 class LessonController extends Controller
@@ -20,7 +21,15 @@ class LessonController extends Controller
                 ->select('content_id')->column();
             $completed = array_flip($rows);
         }
-        return $this->render('index', compact('chapters', 'completed'));
+        // Harflar bosqichi progressi
+        $letterTotal = (int)ArabicLetter::find()->count();
+        $letterDone = 0;
+        if (!Yii::$app->user->isGuest) {
+            $letterDone = (int)UserProgress::find()
+                ->where(['user_id' => Yii::$app->user->id, 'content_type' => 'letter', 'completed' => 1])
+                ->count();
+        }
+        return $this->render('index', compact('chapters', 'completed', 'letterTotal', 'letterDone'));
     }
 
     public function actionChapter($chapter)
