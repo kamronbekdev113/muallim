@@ -12,3 +12,5 @@ phpunit.phar
 /phpunit.xml
 /runtime
 /web/assets
+
+/deploy/db.php
